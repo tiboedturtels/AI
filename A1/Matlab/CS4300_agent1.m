@@ -19,9 +19,9 @@ function action = CS4300_agent1(percept)
 % Call:
 %     a = CS4300_Example1([0,1,0,0,0]);
 % Author:
-%     T. Henderson
+%     William Garnes and Cameron Jackson
 %     UU
-%     Summer 2015
+%     Fall 2017 
 %
 
 persistent state
@@ -33,7 +33,7 @@ GRAB = 4;
 SHOOT = 5;
 CLIMB = 6;
 
-action = ROTATE_RIGHT;
+action = randi(3,1);
 
 if isempty(state)
     state = 0;

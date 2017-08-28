@@ -1,0 +1,20 @@
+max_steps = 50
+
+trace = CS4300_WW2(max_steps,'CS4300_agent1');
+
+gotGold = 0
+step = 1
+
+while trace(step).agent.alive == 1 & step < max_steps
+    
+    step = step + 1;
+    trace(step+1).agent = agent;
+    alive = trace.
+    if agent.alive==0|agent.succeed==1|agent.climbed==1
+        done = 1;
+    end
+    
+end
+
+
+%M = CS4300_show_trace(t,1);
