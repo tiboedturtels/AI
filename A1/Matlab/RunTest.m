@@ -16,7 +16,7 @@ for max_steps = 5:5:100
 
         trace = CS4300_WW2(max_steps,'CS4300_agent1');
         step = 1;
-
+        
 
         while trace(step).agent.alive == 1 & step < (max_steps + 1)
             if trace(step).agent.x == 2 & trace(step).agent.y == 2
