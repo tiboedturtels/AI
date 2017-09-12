@@ -1,5 +1,5 @@
 function action = CS4300_agent1(percept)
-% CS4300_Example1 - simple agent example
+% CS4300_agent1
 %    Takes actions: right, left, climb
 % On input:
 %     percept (1x5 Boolean vector): percept values
@@ -17,7 +17,7 @@ function action = CS4300_agent1(percept)
 %       SHOOT = 5;
 %       CLIMB = 6;
 % Call:
-%     a = CS4300_Example1([0,1,0,0,0]);
+%     a = CS4300_agent1([0,1,0,0,0]);
 % Author:
 %     William Garnes and Cameron Jackson
 %     UU

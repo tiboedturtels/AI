@@ -1,3 +1,14 @@
+% RunTest
+%    Tests the CS4300_agent1 function 2000 times
+%    with a maximum number of steps ranging from
+%    5 - 100
+%
+% Author:
+%     William Garnes and Cameron Jackson
+%     UU
+%     Fall 2017 
+%
+
 results_step_mean = zeros(20,1);
 results_step_variance = zeros(20,1);
 results_step_ci_low = zeros(20,1);
