@@ -1,5 +1,5 @@
 function drive = CS4300_Driver()
-max_steps = 1000;
+max_steps = 500;
 
 
 

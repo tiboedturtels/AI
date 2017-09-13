@@ -39,14 +39,12 @@ if isempty(state)
     state = [1, 1, 0];
     got_gold = 0;
     unsafe_cells = ones(4,4);
-    unsafe_cells(1,1) = 0;
+    unsafe_cells(4,1) = 0;
 end
 
 if(percept(3) == 1 && got_gold == 0)
     got_gold = 1;
     search_tree = CS4300_Wumpus_BFS(unsafe_cells, state, [1, 1, 0]);
-    length = size(search_tree);
-    length = length(1);
     %action_queue = zeros(length+1);
     %action_queue(1) = 4;
     action_queue = search_tree(:, end).';
@@ -94,7 +92,7 @@ if(got_gold == 0)
         end
     end
     
-    unsafe_cells(state(1), state(2)) = 0;
+    unsafe_cells(5 - state(2), state(1)) = 0;
 else 
     action = action_queue(1);
     action_queue = action_queue(2:end);
