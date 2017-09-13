@@ -1,4 +1,12 @@
 function drive = CS4300_Driver()
+% CS4300_Driver - A* search agent example
+%    Driver for the program
+%
+% Author:
+%     William Garnes and Cameron Jackson
+%     UU
+%     Fall 2017
+
 max_steps = 500;
 
 

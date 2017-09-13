@@ -1,12 +1,45 @@
 function [solution, nodes] = CS4300_Wumpus_A_star(board,initial_state,goal_state,h_name)
+% CS4300_Wumpus_A_star - A* algorithm for Wumpus world
+% On input:
+%     board (4x4 int array): Wumpus board layout
+%       0: means empty cell
+%       1: means a pit in cell
+%       2: means gold (only) in cell
+%       3: means Wumpus (only) in cell
+%       4: means gold and Wumpus in cell
+%     initial_state (1x3 vector): x,y,dir state
+%     goal_state (1x3 vector): x,y,dir state
+%     h_name (string): name of heuristic function
+% On output:
+%     solution (nx4 array): solution sequence of state and the action
+%     nodes (search tree data structure): search tree
+%       (i).parent (int): index of node’s parent
+%       (i).level (int): level of node in search tree
+%       (i).state (1x3 vector): [x,y,dir] state represented by node
+%       (i).action (int): action along edge from parent to node
+%       (i).g (int): path length from root to node
+%       (i).h (float): heuristic value (estimate from node to goal)
+%       (i).cost (float): g + h   (called f value in text)
+%       (i).children (1xk vector): list of node’s children
+% Call:
+%[so,no] = CS4300_Wumpus_A_star1([0,0,0,0;0,0,0,1;0,2,1,3;0,0,0,0],...
+%          [1,1,0],[2,2,1],’CS4300_A_star_Man’)
+% so =
+%     1     1     0     0
+%     2     1     0     1
+%     2     1     1     3
+%     2     2     1     1
+%
+% no = 1x9 struct array with fields:
+%    parent
 
 nodes(1).parent = [];
 nodes(1).level = 0;
 nodes(1).state = initial_state;
 nodes(1).action = 0;
-nodes(1).cost = 0;
-nodes(1).distance_to_goal = feval(h_name,initial_state,goal_state);
-nodes(1).total_cost = nodes(1).distance_to_goal;
+nodes(1).g = 0;
+nodes(1).h = feval(h_name,initial_state,goal_state);
+nodes(1).cost = nodes(1).h;
 nodes(1).children = [];
 
 frontier = [1];
@@ -37,9 +70,9 @@ while(~isempty(frontier))
             nodes(num_nodes).level = nodes(node).level + 1;
             nodes(num_nodes).state = next_state;
             nodes(num_nodes).action = action;
-            nodes(num_nodes).cost = nodes(node).cost + 1;
-            nodes(num_nodes).distance_to_goal =  feval(h_name,initial_state,goal_state);
-            nodes(num_nodes).total_cost = nodes(num_nodes).distance_to_goal + nodes(num_nodes).cost;
+            nodes(num_nodes).g = nodes(node).g + 1;
+            nodes(num_nodes).h =  feval(h_name,initial_state,goal_state);
+            nodes(num_nodes).cost = nodes(num_nodes).h + nodes(num_nodes).g;
             nodes(num_nodes).children = [];
             nodes(node).children = [nodes(node).children,num_nodes];
             frontier = CS4300_Add_node_to_queue(frontier, nodes, num_nodes);
@@ -52,16 +85,16 @@ while(~isempty(frontier))
                 index = frontier(f);
                 f_state = nodes(index).state;
                 if f_state(1)==x&&f_state(2)==y&&f_state(3)==d
-                    if(nodes(frontier(f)).total_cost > ...
-                            (nodes(node).cost + 1 +  feval(h_name,initial_state,goal_state)))
+                    if(nodes(frontier(f)).cost > ...
+                            (nodes(node).g + 1 +  feval(h_name,initial_state,goal_state)))
                         num_nodes = num_nodes + 1;
                         nodes(num_nodes).parent = node;
                         nodes(num_nodes).level = nodes(node).level + 1;
                         nodes(num_nodes).state = next_state;
                         nodes(num_nodes).action = action;
-                        nodes(num_nodes).cost = nodes(node).cost + 1;
-                        nodes(num_nodes).distance_to_goal =  feval(h_name,initial_state,goal_state);
-                        nodes(num_nodes).total_cost = nodes(num_nodes).distance_to_goal + nodes(num_nodes).cost;
+                        nodes(num_nodes).g = nodes(node).g + 1;
+                        nodes(num_nodes).h =  feval(h_name,initial_state,goal_state);
+                        nodes(num_nodes).cost = nodes(num_nodes).h + nodes(num_nodes).g;
                         nodes(num_nodes).children = [];
                         nodes(node).children = [nodes(node).children,num_nodes];
                         frontier = CS4300_Add_node_to_queue(frontier, nodes, num_nodes);
