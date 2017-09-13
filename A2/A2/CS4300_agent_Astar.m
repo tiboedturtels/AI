@@ -44,15 +44,10 @@ end
 
 if(percept(3) == 1 && got_gold == 0)
     got_gold = 1;
-    search_tree = CS4300_Wumpus_BFS(unsafe_cells, state, [1, 1, 0]);
-    %action_queue = zeros(length+1);
-    %action_queue(1) = 4;
+    search_tree = CS4300_Wumpus_A_star(unsafe_cells, state, [1,1,0],'CS4300_Manhattan_Distance'); 
     action_queue = search_tree(:, end).';
     action_queue = action_queue(:, 2:end);
     action_queue = [4, action_queue, 6];
-   % for index = 2:length
-    %    action_queue(index) = search_tree(index,
-    %end
 end
 
 action = 0;
