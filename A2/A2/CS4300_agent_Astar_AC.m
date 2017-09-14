@@ -19,7 +19,8 @@ function action = CS4300_agent_Astar_AC(percept)
 % Call:
 %     a = CS4300_agent_Astar_AC([0,0,0,0,0]);
 % Author:
-%     William Garnes
+%     William Garnes and Cam Jackson
 %     UU
 %     Fall 2017
 %
+

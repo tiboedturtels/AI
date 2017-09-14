@@ -21,7 +21,6 @@ function D_revised = CS4300_AC3(G,D,P)
 %     Fall 2017
 %
 
-% populate queue with all arcs
 queue = [];
 G_width = size(G, 1);
 for i = 1:G_width
