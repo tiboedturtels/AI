@@ -24,6 +24,6 @@ function p = CS4300_Wumpus_Constraint(i,a,j,b)
 %     return
 % end
 
-constraint = [ 1, 0, 1; 0, 1, 1; 1, 1, 0 ]
-p = constraint(i, j);
+constraint = [ 1, 0, 1; 0, 1, 1; 1, 1, 1 ];
+p = constraint(a, b);
 return

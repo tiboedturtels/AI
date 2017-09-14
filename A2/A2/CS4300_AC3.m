@@ -25,9 +25,11 @@ function D_revised = CS4300_AC3(G,D,P)
 queue = [];
 G_width = size(G, 1);
 for i = 1:G_width
-    for j = 0:G_width
+    for j = 1:G_width
         if(G(i, j))
-            queue = [queue, [i, j]];
+            arc.x = i;
+            arc.y = j;
+            queue = [queue, arc];
         end
     end
 end
@@ -39,19 +41,23 @@ while ~isempty(queue)
     queue = queue(2 : end);
     [D_revised,revised] = CS4300_Revise(D_revised, current, P);
     if(revised)
-        if(D_revised(current(1)) == [0, 0, 0])
+        if(D_revised(current.x,:) == zeros(size(D_revised(1,:),2)))
             D_revised = [];
             return
         end
+        
         len = size(G);
         for  i = 1:len(1)
-            if(i ~= current(2) && G(i, current(1)) == 1)
-                queue = [queue, [i, current(1)]];
+            if(i ~= current.y && G(i, current.x) == 1)
+                arc.x = i;
+                arc.y = current.x;
+                queue = [queue, arc];
             end
         end
+        
     end
 end
-D_revised = D;
+
 return;
                
             
