@@ -25,23 +25,27 @@ function action = CS4300_agent_Astar_AC(percept)
 %
 
 persistent state;
+persistent locations
 
-locations(1).x = 1; locations(1).y = 1;
-locations(2).x = 2; locations(2).y = 1;
-locations(3).x = 3; locations(3).y = 1;
-locations(4).x = 4; locations(4).y = 1;
-locations(5).x = 1; locations(5).y = 2;
-locations(6).x = 2; locations(6).y = 2;
-locations(7).x = 3; locations(7).y = 2;
-locations(8).x = 4; locations(8).y = 2;
-locations(9).x = 1; locations(9).y = 3;
-locations(10).x = 2; locations(10).y = 3;
-locations(11).x = 3; locations(11).y = 3;
-locations(12).x = 4; locations(12).y = 3;
-locations(13).x = 1; locations(13).y = 1;
-locations(14).x = 2; locations(14).y = 1;
-locations(15).x = 3; locations(15).y = 1;
-locations(16).x = 4; locations(16).y = 1;
+if(isempty(locations))
+
+locations(1).x = 1; locations(1).y = 1; locations(1).v = 1;
+locations(2).x = 2; locations(2).y = 1; locations(2).v = 0;
+locations(3).x = 3; locations(3).y = 1; locations(3).v = 0;
+locations(4).x = 4; locations(4).y = 1; locations(4).v = 0;
+locations(5).x = 1; locations(5).y = 2; locations(5).v = 0;
+locations(6).x = 2; locations(6).y = 2; locations(6).v = 0;
+locations(7).x = 3; locations(7).y = 2; locations(7).v = 0;
+locations(8).x = 4; locations(8).y = 2; locations(8).v = 0;
+locations(9).x = 1; locations(9).y = 3; locations(9).v = 0;
+locations(10).x = 2; locations(10).y = 3; locations(10).v = 0;
+locations(11).x = 3; locations(11).y = 3; locations(11).v = 0;
+locations(12).x = 4; locations(12).y = 3; locations(12).v = 0;
+locations(13).x = 1; locations(13).y = 4; locations(13).v = 0;
+locations(14).x = 2; locations(14).y = 4; locations(14).v = 0;
+locations(15).x = 3; locations(15).y = 4; locations(15).v = 0;
+locations(16).x = 4; locations(16).y = 4; locations(16).v = 0;
+end
 
 % set up state
 if(isempty(state))
@@ -67,7 +71,6 @@ if(isempty(state))
     % Set neighbor graphs here
     
     state.Domain = ones(16, 3);
-    
     state.agent_state = [1, 1, 0];
     
     state.action_queue = [];
@@ -76,6 +79,24 @@ if(isempty(state))
 end
 
 action = randi(3,1);
+
+if(percept(2) == 0)
+    index = 1;
+    place = state.agent_state(1) + (4 * state.agent_state(2) - 4);
+    if place == 9
+       hi = 7; 
+    end
+   for i = state.Graph(place,:)
+        if(i == 1)
+            state.Domain(index, 2) = 0;
+            l = locations(index);
+            x = l.x;
+            y = l.y;
+            state.Unsafe(5-y,x) = 0;
+        end
+        index = index + 1;
+   end
+end
 
 if(percept(3) && ~state.got_gold)
     state.got_gold = true;
@@ -90,29 +111,22 @@ end
 if(~isempty(state.action_queue))
     action = state.action_queue(1);
     state.action_queue = state.action_queue(2:end);
-    
+    state.agent_state = CS4300_Next_Agent_State(state.agent_state, action);
+    return
 else
-    if(percept(2) == 0)
-        index = 1;
-       for i = state.Graph(state.agent_state(2) + (4 * state.agent_state(1) - 4),:)
-            if(i == 1)
-                state.Domain(index, 2) = 0;
-            end
-            index = index + 1;
-       end
-    end
     state.Domain = CS4300_AC3(state.Graph, state.Domain, 'CS4300_Wumpus_Constraint');
     for i = 1:size(state.Domain, 1)
         l = locations(i);
         x = l.x;
         y = l.y;
-        if(~state.Domain(i, 2) && state.Unsafe(x, y))
-            state.Unsafe(5 - y, x) = 0;
+        if((state.Domain(i, 2) == 0) && (locations(i).v == 0))
+            locations(i).v = 1;
             search_res = CS4300_Wumpus_A_star(state.Unsafe,state.agent_state,[x,y,0],'CS4300_Manhattan_Distance');
             state.action_queue = search_res(:, end).';
             state.action_queue = state.action_queue(:, 2:end);
             action = state.action_queue(1);
             state.action_queue = state.action_queue(2:end);
+            state.agent_state = CS4300_Next_Agent_State(state.agent_state, action);
             return
             
         end
