@@ -1,6 +1,6 @@
 function drive = CS4300_Test_Driver()
-% CS4300_Driver - A* Test Driver
-%    Driver for the program
+% CS4300_Driver - Test Driver
+%    A driver for gathering test data
 %
 % Author:
 %     William Garnes and Cameron Jackson
@@ -104,7 +104,5 @@ AC3_ci_3 = AC3_ci_3(:,1);
 % title('Average Success Rate');
 % ylabel('Fraction');
 % xlabel('Algorithm');
-
-a = 5;
 
 end

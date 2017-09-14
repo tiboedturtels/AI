@@ -1,4 +1,16 @@
 function [ D_revised, revised ] = CS4300_Revise( D, arc, P )
+% CS4300_Revise - Revises a single arc of the constraint graph
+%
+% On input:
+%     D ([n*3] vector of Booleans): Domain labels
+%     arc (length-2 struct of integers): Indices for the nodes of the arc
+%     P (string): Name of constraint function
+%     
+%
+% Author:
+%     William Garnes and Cameron Jackson
+%     UU
+%     Fall 2017
 
 D_revised = D;
 revised = 0;
