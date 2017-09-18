@@ -12,7 +12,7 @@ function [KB,KBi,vars] = CS4300_gen_KB
 % Call:
 %     [KB,KBi,vars] = CS4300_gen_KB;
 % Author:
-%     <Your name>
+%     William Garnes and Camerson Jackson
 %     UU
 %     Fall 2017
 %

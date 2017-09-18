@@ -19,7 +19,7 @@ function Sip = CS4300_RTP(sentences,thm,vars)
 %     vars = [1,2,3,4];
 %     Sr = CS4300_RTP(DP,thm,vars);
 % Author:
-%     <Your name>
+%     William Garnes and Cameron Jackson
 %     UU
 %     Fall 2017
 %
