@@ -17,16 +17,11 @@ function [KB,KBi,vars] = CS4300_gen_KB
 %     Fall 2017
 %
 
-B = 0;
-G = 16;
-P = 32;
-S = 48;
-W = 64;
+global offset.
 
 vars = CS4300_vars();
 
 KB = strings(0);
 KBi = [];
 
-[KB, KBi]  = CS4300_add_breezes(KB, KBi, vars);
-end
+KB = CS4300_add_breezes(KB, KBi, vars);
