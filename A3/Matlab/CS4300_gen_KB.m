@@ -31,5 +31,7 @@ KBi(500).clauses = -1000;
 global current_i;
 current_i = 1;
 
-[KB, KBi]  = CS4300_add_breezes(KB, KBi, vars);
+[KB, KBi] = CS4300_add_breezes(KB, KBi, vars);
+[KB, KBi] = CS4300_add_wumpus(KB, KBi, vars);
+[KB, KBi] = CS4300_add_gold(KB, KBi, vars);
 end
