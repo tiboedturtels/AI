@@ -44,9 +44,15 @@ for i = 1 + B : B + 16
         other_cells(length(other_cells) + 1) = P + (breeze_y - 0) * 4 + breeze_x;
     end
     
-    KB(current_i).clauses = vars(B + i);
-    KBi(current_i).clauses = B + i;
-    current_i = current_i + 1;
+    % Add binary disjunctions
+    for cell_i = 1 : length(other_cells)
+        clause = [ -1 * breeze_cell, other_cells(cell_i) ];
+        [KB, KBi] = CS4300_add_clause(clause, KB, KBi, vars);
+    end
+    
+    % Add the big clause
+    clause = [ breeze_cell, -1 * other_cells ];
+    [KB, KBi] = CS4300_add_clause(clause, KB, KBi, vars);
 end
 end
 
