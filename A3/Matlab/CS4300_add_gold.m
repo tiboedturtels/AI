@@ -1,5 +1,5 @@
 function [ KB, KBi ] = CS4300_add_gold( KB, KBi, vars )
-% CS4300_add_breezes - add wumpus disjuntions to knowledge base
+% CS4300_add_gold - add gold disjuntions to knowledge base
 % On input:
 %     KB (CNF KB): current KB with Wumpus logic (atom symbols)
 %     KBi (CNF KB): current KB with Wumpus logic (integers)

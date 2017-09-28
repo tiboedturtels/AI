@@ -24,19 +24,11 @@ function Sip = CS4300_RTP(sentences,thm,vars)
 %     Fall 2017
 %
 
-Sip = -1;
-
-for sentence = sentences
-    if(CS_4300_is_tautology(sentence.clauses))
-        Sip = [];
-        return
-    end
-end
-
 for value = thm(1).clauses
     sentences(length(sentences) + 1).clauses = [value * -1];
 end
 
+Sip = [-1];
 new = [];
 
 new_added = 1;
@@ -64,12 +56,12 @@ while(new_added)
    end
    
     new_to_add = [];
+    is_new = true;
     for new_sentence = new
-        is_new = true;
+        
         for old_sentence = sentences
             if(isequal(new_sentence.clauses, old_sentence.clauses))
                 is_new = false;
-                break
             end
         end
         if(is_new)

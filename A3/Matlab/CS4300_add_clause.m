@@ -2,6 +2,7 @@ function [ KB, KBi ] = CS4300_add_clause( clause, KB, KBi, vars )
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 
+clause = sort(clause);
 num_vars = length(clause);
 names = "";
 for i = 1 : num_vars
