@@ -26,13 +26,6 @@ function Sip = CS4300_RTP(sentences,thm,vars)
 
 Sip = -1;
 
-for sentence = sentences
-    if(CS_4300_is_tautology(sentence.clauses))
-        Sip = [];
-        return
-    end
-end
-
 for value = thm(1).clauses
     sentences(length(sentences) + 1).clauses = [value * -1];
 end
