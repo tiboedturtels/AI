@@ -21,8 +21,6 @@ W = 32;
 S = 48;
 W = 64;
 
-global current_i;
-
 for stench_cell = 1 + S : S + 16
     other_cells = [];
     

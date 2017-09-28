@@ -26,10 +26,8 @@ W = 64;
 vars = CS4300_vars();
 
 % preallocate the size to 500
-KB(500).clauses = strings(0);
-KBi(500).clauses = -1000;
-global current_i;
-current_i = 1;
+KB = [];
+KBi = [];
 
 [KB, KBi] = CS4300_add_breezes(KB, KBi, vars);
 [KB, KBi] = CS4300_add_stenches(KB, KBi, vars);

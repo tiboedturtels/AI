@@ -21,8 +21,6 @@ P = 32;
 S = 48;
 W = 64;
 
-global current_i;
-
 for breeze_cell = 1 + B : B + 16
     other_cells = [];
     
