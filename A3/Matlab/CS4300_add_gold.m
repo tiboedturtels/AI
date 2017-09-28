@@ -1,19 +1,26 @@
 function [ KB, KBi ] = CS4300_add_gold( KB, KBi, vars )
-% CS4300_add_gold - add gold disjuntions to knowledge base
+% CS4300_add_gold - add all gold-related disjunctions to knowledge base
 % On input:
 %     KB (CNF KB): current KB with Wumpus logic (atom symbols)
+%      (k).clauses (string): string form of disjunction
 %     KBi (CNF KB): current KB with Wumpus logic (integers)
+%      (k).clauses (1xp vector): integer form of disjunction
 %     vars(struct: vector of strings): list of atom strings
+%      (k).var (string): name of atom
 % On output:
 %     KB (CNF KB): updated KB with Wumpus logic (atom symbols)
 %     KBi (CNF KB): updated KB with Wumpus logic (integers)
 % Call:
-%     [KB,KBi,vars] = CS4300_gen_KB;
+%     KB = [];
+%     KBi = [];
+%     vars = CS4300_vars();
+%     [KB,KBi] = CS4300_add_gold(KB, KBi, vars);
 % Author:
 %     William Garnes and Cameron Jackson
 %     UU
 %     Fall 2017
 %
+
 
 B = 0;
 G = 16;

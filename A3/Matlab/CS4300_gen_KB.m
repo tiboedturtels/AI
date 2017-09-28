@@ -25,7 +25,6 @@ W = 64;
 
 vars = CS4300_vars();
 
-% preallocate the size to 500
 KB = [];
 KBi = [];
 

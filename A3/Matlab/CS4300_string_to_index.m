@@ -1,6 +1,17 @@
 function index = CS4300_string_to_index( str )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+% CS4300_string_to_index - converts a string to an index into the variables
+% vector
+% On input:
+%     clause (string): the string to convert
+% On output:
+%     index (Integer): the converted index
+% Call:
+%     i = CS4300_string_to_index("G34");
+% Author:
+%     William Garnes and Cameron Jackson
+%     UU
+%     Fall 2017
+%
 
 chars = char(str);
 
