@@ -23,11 +23,10 @@ W = 64;
 
 global current_i;
 
-for i = 1 + B : B + 16
-    breeze_cell = B + i;
+for breeze_cell = 1 + B : B + 16
     other_cells = [];
     
-    breeze_chars = char(vars(i));
+    breeze_chars = char(vars(breeze_cell));
     breeze_x = str2num(breeze_chars(2));
     breeze_y = str2num(breeze_chars(3));
     
@@ -46,12 +45,12 @@ for i = 1 + B : B + 16
     
     % Add binary disjunctions
     for cell_i = 1 : length(other_cells)
-        clause = [ -1 * breeze_cell, other_cells(cell_i) ];
+        clause = [ breeze_cell, -1 * other_cells(cell_i) ];
         [KB, KBi] = CS4300_add_clause(clause, KB, KBi, vars);
     end
     
     % Add the big clause
-    clause = [ breeze_cell, -1 * other_cells ];
+    clause = [ -1 * breeze_cell, other_cells ];
     [KB, KBi] = CS4300_add_clause(clause, KB, KBi, vars);
 end
 end
