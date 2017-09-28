@@ -24,15 +24,18 @@ function Sip = CS4300_RTP(sentences,thm,vars)
 %     Fall 2017
 %
 
+Sip = -1;
+loop_count = 0;
+
 for value = thm(1).clauses
     sentences(length(sentences) + 1).clauses = [value * -1];
 end
 
-Sip = [-1];
 new = [];
 
 new_added = 1;
 while(new_added)
+    loop_count = loop_count + 1; 
    new_added = 0;
    for i = 1 : length(sentences) - 1
       for j = i + 1 : length(sentences)
@@ -45,6 +48,8 @@ while(new_added)
                  new_sentence = union(sentence11, sentence22);
                  if(isempty(new_sentence))
                      Sip = [];
+                     length(sentences)
+                     loop_count
                     return 
                  end
                  if(~CS_4300_is_tautology(new_sentence))
@@ -56,12 +61,12 @@ while(new_added)
    end
    
     new_to_add = [];
-    is_new = true;
     for new_sentence = new
-        
+        is_new = true;
         for old_sentence = sentences
             if(isequal(new_sentence.clauses, old_sentence.clauses))
                 is_new = false;
+                break
             end
         end
         if(is_new)
@@ -77,3 +82,6 @@ while(new_added)
     new = [];
    
 end
+
+length(sentences)
+loop_count
