@@ -1,18 +1,29 @@
-function action = CS4300_hybrid_agent(percept) 
-% CS4300_hybrid_agent - hybrid random and logic-based agent
-% On input: 
-%     percept( 1x5 Boolean vector): percepts 
-% On output: 
-%     action (int): action selected by agent 
-% Call: 
-%     a = CS4300_hybrid_agent([0,0,0,0,0]); 
-% Author: 
-%     William Garnes and Cameron Jackson 
-%     UU 
-%     Fall 2017 
+function action = CS4300_hybrid_agent0(percept)
+% CS4300_hybrid_agent0 - hybrid agent with a few informal rules
+% On input:
+%    percept (1x5 Boolean vector): percept from Wumpus world
+%       (1): stench
+%       (2): breeze
+%       (3): glitter
+%       (4): bump
+%       (5): scream
+% On output:
+%     action (int): action to take
+%       1: FORWARD
+%       2: RIGHT
+%       3: LEFT
+%       4: GRAB
+%       5: SHOOT
+%       6: CLIMB
+% Call:
+%     a = CS4300_hybrid_agent0(percept);
+% Author:
+%     T. Henderson
+%     UU
+%     Fall 2015
 %
 
-persistent t plan board agent safe visited have_gold pits Wumpus KB KBi vars
+persistent t plan board agent safe visited have_gold pits Wumpus
 
 if isempty(t)
     t = 0;
@@ -30,7 +41,6 @@ if isempty(t)
     safe = zeros(4,4);
     safe(4,1) = 1;
     have_gold = 0;
-    [KB, KBi, vars] = CS4300_gen_KB;
 end
 
 MINUS = '-';
@@ -42,44 +52,18 @@ GRAB = 4;
 SHOOT = 5;
 CLIMB = 6;
 
-% % informal logic rules
-% neighbors = CS4300_Wumpus_neighbors(agent.x,agent.y);
-% num_neighbors = length(neighbors(:,1));
-% for n = 1:num_neighbors
-%     n_x = neighbors(n,1);
-%     n_y = neighbors(n,2);
-%     if percept(1)==0
-%         Wumpus(4-n_y+1,n_x) = 0;
-%     end
-%     if percept(2)==0
-%         pits(4-n_y+1,n_x) = 0;
-%     end
-% end
-
+% informal logic rules
 neighbors = CS4300_Wumpus_neighbors(agent.x,agent.y);
 num_neighbors = length(neighbors(:,1));
 for n = 1:num_neighbors
     n_x = neighbors(n,1);
     n_y = neighbors(n,2);
-    row = 4-n_y+1;
-    col = n_x;
-
-    if Wumpus(row, col) == -1
-        str = strcat('W', int2str(n_x), int2str(n_y));
-        pos_sentence.clauses = CS4300_string_to_index(str);
-        neg_sentence.clauses = -pos_sentence.clauses;
-        % If Wumpus here
-        if CS4300_Ask(KBi, pos_sentence)
-            Wumpus(row, col) = 1;
-            pits(row, col) = 0;
-        % If no Wumpus here
-        elseif CS4300_Ask(KBi, neg_sentence)
-            Wumpus(row, col) = 0;
-        end
+    if percept(1)==0
+        Wumpus(4-n_y+1,n_x) = 0;
     end
-    
-% ---------- put pit stuff here ---------- %
-    
+    if percept(2)==0
+        pits(4-n_y+1,n_x) = 0;
+    end
 end
 
 [rows,cols] = find(pits==0&Wumpus==0);
