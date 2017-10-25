@@ -25,20 +25,16 @@ if isempty(sentence)
 end
 
 %vars = CS4300_get_vars(KB,sentence);
-vars = [1];
 num_sentences = length(KB);
 len_sentence = length(sentence);
 for s = 1:len_sentence
     KB(num_sentences+1).clauses = -sentence(s).clauses;
-    KB(num_sentences+1).clauses
     CS4300_create_SAT_prob(KB,'HYBKB');
     system('sat.py < HYBKB >popo');
     fd = fopen('popo','r');
     t = fscanf(fd,'%s');
     if ~isempty(t)
         return
-    else
-        t
     end
     clear t
     fclose(fd);
