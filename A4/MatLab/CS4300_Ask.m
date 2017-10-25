@@ -1,10 +1,10 @@
 function b = CS4300_Ask(KB,sentence)
 % CS4300_Ask - Ask function for logic KB
 % On input:
-%     KB (KB struct): Knowledge base (CNF)
-%       (k).clauses (1xp vector): disjunction clause
-%     sentence (KB struct): query theorem (CNF)
-%       (k).clauses (1xq vector): disjunction
+%   KB (KB struct): Knowledge base (CNF)
+%     (k).clauses (1xp vector): disjunction clause
+%   sentence (KB struct): query theorem (CNF)
+%     (k).clauses (1xq vector): disjunction
 % On output:
 %     b (Boolean): 1 if KB entails sentence, else 0
 % Call:
@@ -13,7 +13,7 @@ function b = CS4300_Ask(KB,sentence)
 %     sentence(1).clauses = [2];
 %     b = CS4300_Ask(KB,sentence);
 % Author:
-%     T. Henderson
+%     William Garnes and Cameron Jackson
 %     UU
 %     Fall 2017
 %
@@ -24,12 +24,15 @@ if isempty(sentence)
     return
 end
 
-%vars = CS4300_get_vars(KB,sentence);
-num_sentences = length(KB);
 len_sentence = length(sentence);
-for s = 1:len_sentence
-    KB(num_sentences+1).clauses = -sentence(s).clauses;
-    CS4300_create_SAT_prob(KB,'HYBKB');
+for s = 1 : len_sentence
+    reverse_sentence = -sentence(s).clauses;
+    len_reverse_sentence = length(reverse_sentence);
+    KB_clone = KB;
+    for index = 1 : len_reverse_sentence
+        KB_clone(length(KB_clone) + 1).clauses = reverse_sentence(index);
+    end
+    CS4300_create_SAT_prob(KB_clone,'HYBKB');
     system('sat.py < HYBKB >popo');
     fd = fopen('popo','r');
     t = fscanf(fd,'%s');
