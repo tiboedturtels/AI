@@ -12,7 +12,7 @@ function action = CS4300_hybrid_agent(percept)
 %     Fall 2017 
 %
 
-persistent t plan board agent safe visited have_gold pits Wumpus KB KBi vars
+persistent t plan board agent safe visited have_gold pits have_arrow Wumpus KB KBi vars
 
 if isempty(t)
     t = 0;
@@ -30,6 +30,7 @@ if isempty(t)
     safe = zeros(4,4);
     safe(4,1) = 1;
     have_gold = 0;
+    have_arrow = 1;
     [KB, KBi, vars] = CS4300_gen_KB;
 end
 
@@ -106,6 +107,10 @@ if isempty(plan)
         plan = [so(2:end,end)];
     end
 end
+
+if isempty(plan)
+    [rows,cols] = find(Wumpus==1);
+    if 
 
 if isempty(plan)
     goal = [];
