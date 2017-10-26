@@ -56,7 +56,7 @@ CLIMB = 6;
 %     end
 % end
 
-percept_sentence = CS4300_make_percept_sentence(percept, agent.x, agent.y);
+percept_senetence = CS4300_make_percept_sentence(percept, agent.x, agent.y);
 KBi = CS4300_Tell(KBi, percept_sentence);
 
 neighbors = CS4300_Wumpus_neighbors(agent.x,agent.y);
