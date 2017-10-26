@@ -15,10 +15,21 @@ function KB_out = CS4300_Tell(KB,sentence)
 %       Fall 2017 
 %
 
+KB_origin = KB;
 sentence_size = length(sentence);
 
 for index = 1 : sentence_size
    KB(length(KB) + 1).clauses = sentence(index).clauses; 
+end
+
+sentence(1).clauses = [1];
+v1 = CS4300_Ask(KB, sentence);
+sentence(1).clauses = [-1];
+v2 = CS4300_Ask(KB, sentence);
+
+if(v1 == 1 && v2 == 1)
+    KB_out = KB_origin;
+    return;
 end
 
 KB_out = KB;

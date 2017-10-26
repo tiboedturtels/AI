@@ -18,6 +18,27 @@ function sentence = CS4300_make_percept_sentence(percept,x,y)
 % Fall 2017 
 %
 
+sentence(1).clauses = [];
+if(length(percept) ~= 5)
+   return
+end
+
+for index = 1:5
+   if(percept(index) == 0 || percept(index) == 1)
+       continue
+   else
+       return
+   end
+end
+
+if(x < 1  || x > 4)
+   return
+end
+
+if(y < 1  || y > 4)
+   return
+end
+
 %generate the indexes
 stench = 1;
 breeze = 2;
