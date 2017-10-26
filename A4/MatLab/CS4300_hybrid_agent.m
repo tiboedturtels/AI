@@ -42,20 +42,6 @@ GRAB = 4;
 SHOOT = 5;
 CLIMB = 6;
 
-% % informal logic rules
-% neighbors = CS4300_Wumpus_neighbors(agent.x,agent.y);
-% num_neighbors = length(neighbors(:,1));
-% for n = 1:num_neighbors
-%     n_x = neighbors(n,1);
-%     n_y = neighbors(n,2);
-%     if percept(1)==0
-%         Wumpus(4-n_y+1,n_x) = 0;
-%     end
-%     if percept(2)==0
-%         pits(4-n_y+1,n_x) = 0;
-%     end
-% end
-
 percept_sentence = CS4300_make_percept_sentence(percept, agent.x, agent.y);
 KBi = CS4300_Tell(KBi, percept_sentence);
 
@@ -81,15 +67,15 @@ for n = 1:num_neighbors
         end
     end
     
-    %If we don't know if there is a Wumpus
+    %If we don't know if there is a pit
     if pits(row, col) == -1
         pos_sentence.clauses = CS4300_get_var_index('P', n_x, n_y);
         neg_sentence.clauses = -pos_sentence.clauses;
-        % If Wumpus here
+        % If pit here
         if CS4300_Ask(KBi, pos_sentence)
             pits(row, col) = 1;
             Wumpus(row, col) = 0;
-        % If no Wumpus here
+        % If no pit here
         elseif CS4300_Ask(KBi, neg_sentence)
             pits(row, col) = 0;
         end
