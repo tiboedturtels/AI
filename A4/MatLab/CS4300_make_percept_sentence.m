@@ -1,21 +1,21 @@
 function sentence = CS4300_make_percept_sentence(percept,x,y) 
 % CS4300_make_percept_sentence - create logical sentence from percept 
 % On input: 
-% percept (1x5 Boolean vector): percept 
-% [Stench,Breeze,Glitter,Scream,Bump] 
-% x (int): x location of agent 
-% y (int): y location of agent 
+%     percept (1x5 Boolean vector): percept 
+%        [Stench,Breeze,Glitter,Scream,Bump] 
+%     x (int): x location of agent 
+%     y (int): y location of agent 
 % On output: 
-% sentence (KB struct): logical sentence (CNF) 
-% (1).clauses (int): c1 (index of Sxy if stench), else -c1 
-% (2).clauses (int): c2 (index of Bxy if breeze), else -c2 
-% (3).clauses (int): c3 (index of Gxy if glitter), else -c3 
+%     sentence (KB struct): logical sentence (CNF) 
+%        (1).clauses (int): c1 (index of Sxy if stench), else -c1 
+%        (2).clauses (int): c2 (index of Bxy if breeze), else -c2 
+%        (3).clauses (int): c3 (index of Gxy if glitter), else -c3 
 % Call: 
-% s = CS4300_make_percept_sentence([0,1,0,0,0],3,2); 
+%     s = CS4300_make_percept_sentence([0,1,0,0,0],3,2); 
 % Author: 
-% William Garnes and Cameron Jackson 
-% UU 
-% Fall 2017 
+%     William Garnes and Cameron Jackson 
+%     UU 
+%     Fall 2017 
 %
 
 sentence(1).clauses = [];
