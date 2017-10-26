@@ -1,10 +1,14 @@
 function t = CS4300_RunTests()
-%CS4300_RUNTESTS Summary of this function goes here
-%   Detailed explanation goes here
-
+% CS4300_RunTests - Driver function for tests
+% Call: 
+%     CS4300_RunTests
+% Author: 
+%     William Garnes and Cameron Jackson 
+%     UU 
+%     Fall 2017 
+%
     clear function CS4300_hybrid_agent;
     [scores,traces]=CS4300_WW3(50,'CS4300_hybrid_agent');
-    %CS4300_show_trace(t, 1);
     scores(1).score
     scores(2).score
     scores(3).score

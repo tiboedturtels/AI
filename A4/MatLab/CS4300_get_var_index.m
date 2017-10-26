@@ -1,5 +1,5 @@
 function index = CS4300_get_var_index( type, x, y )
-% CS4300_get_var_index - converts a string to an index into the variables
+% CS4300_get_var_index -  gets an index into the variables
 % vector
 % On input:
 %     type (char): B, G, P, S, or W based on what kind of information
