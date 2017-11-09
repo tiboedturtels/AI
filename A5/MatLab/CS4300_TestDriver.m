@@ -1,7 +1,13 @@
 function r = CS4300_TestDriver()
-%CS4300_TestDriver Summary of this function goes here
-%   Detailed explanation goes here
-    %[scores(1), t]=CS4300_WW1(50,'CS4300_MC_agent',[2,3,1,0; 0,1,0,0; 0,0,0,0; 0,0,0,0]);
+%CS4300_TestDriver - Runs the agent on 250 test boards 
+% CS4300_MC_agent - Monte Carlo agent with a few informal rules 
+% Call:
+%     CS4300_TestDriver();
+% Author:
+%     Cameron Jackson and William Garnes
+%     UU
+%     Fall 2017
+%
     load('A5_boards.mat');
     num_boards = length(boards);
     scores = [];
