@@ -48,8 +48,8 @@ for d = 1:4
     c = loc_c + offsets(d,2); 
     if r>0&r<5&c>0&c<5 
         if board(r,c)==PIT 
-            % WUMPUS
-            percept(2) = 1;
+            % WUMPUS 
+            percept(2) = 1; 
         elseif board(r,c)==WUMPUS 
             % WUMPUS 
             percept(1) = 1; 
