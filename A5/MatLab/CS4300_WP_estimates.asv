@@ -35,29 +35,20 @@ function [pits,Wumpus] = CS4300_WP_estimates(breezes,stench,num_trials)
 % Fall 2016 
 %
 
-no_wumpus = 0;
+
 
 pits = zeros(4,4);
 Wumpus = zeros(4,4);
 for count = 1:num_trials
     temp_wumus = CS4300_gen_wumpus_position(stench);
     temp_pits = CS4300_gen_pit_board(breezes);    
-   
     
-    if temp_wumus == [-1, -1]
-        no_wumpus = 1;
-    end
-    
-    if ~no_wumpus
-        while temp_pits(temp_wumus(1), temp_wumus(2))
-            temp_wumus = CS4300_gen_wumpus_position(stench);
-            temp_pits = CS4300_gen_pit_board(breezes); 
-        end
+    while temp_pits(temp_wumus(1), temp_wumus(2))
+        temp_wumus = CS4300_gen_wumpus_position(stench);
+        temp_pits = CS4300_gen_pit_board(breezes); 
     end
 
-    if ~no_wumpus
-        Wumpus(temp_wumus(1),temp_wumus(2)) = Wumpus(temp_wumus(1),temp_wumus(2)) + 1;
-    end
+    Wumpus(temp_wumus(1),temp_wumus(2)) = Wumpus(temp_wumus(1),temp_wumus(2)) + 1;
     for row = 1:4
         for column = 1:4
             pits(row,column) = temp_pits(row,column) + pits(row,column);

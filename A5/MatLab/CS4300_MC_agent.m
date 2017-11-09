@@ -58,12 +58,16 @@ if isempty(agent)
     trials = 50;
 end
 
+t = t + 1;
+
 % if we hear the wumpus die
 if percept(5)==1 
     [rW,cW] = find(Wumpus==1); 
     board(rW,cW) = 0; 
     safe(rW,cW) = 1; 
     Wumpus(rW,cW) = 0; 
+    pits(rW,cW) = 0;
+    stenches = zeros(4, 4);
 end
 
 % ----- Consume current plans ----- %
@@ -131,9 +135,17 @@ end
 
 row = 4 - agent.y + 1;
 col = agent.x;
+safe(row, col) = 1;
 breezes(row, col) = percept(2);
 stenches(row, col) = percept(1);
-[pits, Wumpus] = CS4300_WP_estimates(breezes, stenches, trials);            
+[pits, Wumpus] = CS4300_WP_estimates(breezes, stenches, trials);
+for row = 1 : 4
+    for col = 1 : 4
+        if pits(row, col) == 0 && Wumpus(row, col) == 0
+            safe(row, col) = 1;
+        end
+    end
+end
 
 % % Replace KB stuff with probability determinations
 % percept_sentence = CS4300_make_percept_sentence(percept,agent.x,agent.y); 
@@ -194,7 +206,7 @@ stenches(row, col) = percept(1);
 
 % Kill Wumpus 
 [rW,cW] = find(Wumpus>=0.9); 
-if ~isempty(rW) 
+if have_arrow && ~isempty(rW) 
     r_kill = []; 
     c_kill = []; 
     [r_safe,c_safe] = find(safe==1); 
@@ -219,7 +231,9 @@ if ~isempty(rW)
         if x_kill==agent.x&y_kill==agent.y 
             final_dir = agent.dir; 
         else
-            [so,no] = CS4300_Wumpus_A_star(abs(board),... 
+            temp_board = board; 
+            temp_board(4-y_kill+1,x_kill) = 0; 
+            [so,no] = CS4300_Wumpus_A_star(abs(temp_board),... 
                 [agent.x,agent.y,agent.dir],... 
                 [x_kill,y_kill,0],'CS4300_A_star_Man'); 
             kill = so(2:end,4); 
@@ -267,41 +281,47 @@ if ~isempty(rW)
     end
     action = kill(1); 
     kill = kill(2:end); 
-    % Update agent's idea of state agent = CS4300_agent_update(agent,action); 
+    have_arrow = 0;
+    % Update agent's idea of state
+    agent = CS4300_agent_update(agent,action); 
     visited(4-agent.y+1,agent.x) = 1; 
     frontier(4-agent.y+1,agent.x) = 0; 
     board(4-agent.y+1,agent.x) = 0; 
     return 
 end
 
-% % Go to a safe/unvisited cell
-% if isempty(travel) 
-%     [cand_rows,cand_cols] = find(safe==1&visited==0); 
-%     if ~isempty(cand_rows) 
-%         cand_x = cand_cols; 
-%         cand_y = 4 - cand_rows + 1; 
-%         [so,no] = CS4300_Wumpus_A_star(abs(board),... 
-%             [agent.x,agent.y,agent.dir],... 
-%             [cand_x(1),cand_y(1),0],'CS4300_A_star_Man'); 
-%         travel = [so(2:end,4)]; 
-%         action = travel(1);
-%         travel = travel(2:end); 
-%         % Update agent's idea of state 
-%         agent = CS4300_agent_update(agent,action); 
-%         visited(4-agent.y+1,agent.x) = 1; 
-%         frontier(4-agent.y+1,agent.x) = 0; 
-%         board(4-agent.y+1,agent.x) = 0; 
-%         return 
-%     end
-% end
+% Go to a safe/unvisited cell
+if isempty(travel) 
+    [cand_rows,cand_cols] = find(safe==1&visited==0); 
+    if ~isempty(cand_rows) 
+        cand_x = cand_cols; 
+        cand_y = 4 - cand_rows + 1; 
+        temp_board = board; 
+        temp_board(4-cand_y+1,cand_x) = 0; 
+        [so,no] = CS4300_Wumpus_A_star(abs(temp_board),... 
+            [agent.x,agent.y,agent.dir],... 
+            [cand_x(1),cand_y(1),0],'CS4300_A_star_Man'); 
+        travel = [so(2:end,4)]; 
+        action = travel(1);
+        travel = travel(2:end); 
+        % Update agent's idea of state 
+        agent = CS4300_agent_update(agent,action); 
+        visited(4-agent.y+1,agent.x) = 1; 
+        frontier(4-agent.y+1,agent.x) = 0; 
+        board(4-agent.y+1,agent.x) = 0; 
+        return 
+    end
+end
 
 
 % Take a risk 
 if isempty(escape)&isempty(travel)&isempty(risk)&isempty(kill) 
-    [cand_row,cand_col] = CS4300_best_frontier(visited); 
+    [cand_row,cand_col] = CS4300_best_frontier(visited, pits, Wumpus); 
     cand_x = cand_col; 
     cand_y = 4 - cand_row + 1; 
-    indexes = find(cand_x~=agent.x|cand_y~=agent.y); 
+    indexes = find(cand_x~=agent.x|cand_y~=agent.y);
+    goal_x = 1;
+    goal_y = 1;
     if ~isempty(indexes) 
         goal_x = cand_x(indexes(1)); 
         goal_y = cand_y(indexes(1)); 

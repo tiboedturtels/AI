@@ -131,6 +131,7 @@ end
 
 row = 4 - agent.y + 1;
 col = agent.x;
+safe(row, col) = 1;
 breezes(row, col) = percept(2);
 stenches(row, col) = percept(1);
 [pits, Wumpus] = CS4300_WP_estimates(breezes, stenches, trials);            
@@ -193,8 +194,8 @@ stenches(row, col) = percept(1);
 
 
 % Kill Wumpus 
-[rW,cW] = find(Wumpus==1); 
-if ~isempty(rW) 
+[rW,cW] = find(Wumpus>=0.9); 
+if have_arrow && ~isempty(rW) 
     r_kill = []; 
     c_kill = []; 
     [r_safe,c_safe] = find(safe==1); 
@@ -267,6 +268,7 @@ if ~isempty(rW)
     end
     action = kill(1); 
     kill = kill(2:end); 
+    have_arrow = 0;
     % Update agent's idea of state agent = CS4300_agent_update(agent,action); 
     visited(4-agent.y+1,agent.x) = 1; 
     frontier(4-agent.y+1,agent.x) = 0; 
@@ -298,7 +300,7 @@ end
 
 % Take a risk 
 if isempty(escape)&isempty(travel)&isempty(risk)&isempty(kill) 
-    [cand_row,cand_col] = CS4300_best_frontier(visited); 
+    [cand_row,cand_col] = CS4300_best_frontier(visited, pits, Wumpus); 
     cand_x = cand_col; 
     cand_y = 4 - cand_row + 1; 
     indexes = find(cand_x~=agent.x|cand_y~=agent.y); 

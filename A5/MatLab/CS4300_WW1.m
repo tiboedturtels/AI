@@ -32,6 +32,7 @@ agent.gold = 0;  % grabbed gold in same room
 agent.dir = 0;  % facing right
 agent.succeed = 0;  % has gold and climbed out
 agent.climbed = 0; % climbed out
+agent.has_arrow = 1;
 
 trace(1).board = board;
 trace(1).agent = agent;

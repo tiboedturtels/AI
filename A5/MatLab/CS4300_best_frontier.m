@@ -1,7 +1,7 @@
 function [row,col] = CS4300_best_frontier(visited, pits, Wumpus) 
 % 
-row = 0; 
-col = 0; 
+row = 1; 
+col = 1; 
 highest_safety = 0;
 for r = 1:4 
     for c = 1:4 

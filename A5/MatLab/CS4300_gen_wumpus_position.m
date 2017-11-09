@@ -128,7 +128,11 @@ for row = 1:4
    end
 end
 
-index = randi([1,length(wumpus_spots)], 1);
-position = wumpus_spots(index).position;
-Wumpus = position;
+if length(wumpus_spots) == 0
+    Wumpus = [-1, -1];
+else
+    index = randi([1,length(wumpus_spots)], 1);
+    position = wumpus_spots(index).position;
+    Wumpus = position;
+end
         
