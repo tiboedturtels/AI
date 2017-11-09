@@ -6,15 +6,9 @@ function [row,col] = CS4300_best_frontier(visited, pits, Wumpus)
 %     pits (4x4 Float vector): estimated probabilities for pits
 %     Wumpus (4x4 Float vector): estimated probabilities for Wumpuses
 % On output: 
-%     row: selected row
-%     col: selected column
+%     row: 
 % Call:
-%     visited = zeros(4, 4);
-%     visited(4, 1) = 1;
-%     pits = zeros(4, 4);
-%     Wumpus = zeros(4, 4);
-%     Wumpus(4, 2) = 1;
-%     [row, col] = CS4300_best_frontier(visited, pits, Wumpus); 
+%     [s,t]=CS4300_WW1(5,'CS4300_Example1',b1);
 % Author:
 %     Cameron Jackson and William Garnes
 %     UU

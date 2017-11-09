@@ -2,22 +2,22 @@ function Wumpus = CS4300_gen_wumpus_position(stench)
 % CS4300_WP_estimates - returns a wumpus location that fits the
 % criteria
 % On input: 
-% stench (4x4 Boolean array): presence of stench percept at cell 
-% -1: no knowledge 
-% 0: no stench detected 
-% 1: stench detected 
+%     stench (4x4 Boolean array): presence of stench percept at cell 
+%       -1: no knowledge 
+%       0: no stench detected 
+%       1: stench detected 
 %
 % On output: 
-% stench (4x4 [0,1] array): with stench
+%     stench (4x4 [0,1] array): with stench
 % Call: % stench = -ones(4,4); 
-% stench(4,1) = 1; 
-% Wumpus = CS4300_gen_pit_board(stench) 
-% Wumpus = [2,1]
+%     stench(4,1) = 1; 
+%     Wumpus = CS4300_gen_pit_board(stench) 
+%     Wumpus = [2,1]
 % 
 % Author: 
-% William Garnes and Cameron Jackson
-% UU 
-% Fall 2016 
+%     William Garnes and Cameron Jackson
+%     UU 
+%     Fall 2016 
 %
 
 wumpus = -ones(4,4);

@@ -1,26 +1,26 @@
 function action = CS4300_MC_agent(percept) 
 % CS4300_MC_agent - Monte Carlo agent with a few informal rules 
 % On input: 
-% percept (1x5 Boolean vector): percept from Wumpus world 
-% (1): stench 
-% (2): breeze 
-% (3): glitter 
-% (4): bump 
-% (5): scream 
+%     percept (1x5 Boolean vector): percept from Wumpus world 
+%       (1): stench 
+%       (2): breeze 
+%       (3): glitter 
+%       (4): bump 
+%       (5): scream 
 % On output: 
-% action (int): action to take 
-% 1: FORWARD 
-% 2: RIGHT 
-% 3: LEFT 
-% 4: GRAB 
-% 5: SHOOT 
-% 6: CLIMB 
-% Call: 
-% a = CS4300_MC_agent(percept); 
-% Author: 
-% William Garnes and Cameron Jackson
-% UU 
-% Fall 2017 
+%     action (int): action to take 
+%       1: FORWARD 
+%       2: RIGHT 
+%       3: LEFT 
+%       4: GRAB 
+%       5: SHOOT 
+%       6: CLIMB 
+% Call:
+%     [s,t]=CS4300_WW1(5,'CS4300_Example1',b1);
+% Author:
+%     Cameron Jackson and William Garnes
+%     UU
+%     Fall 2017
 %
 
 FORWARD = 1; 
