@@ -50,8 +50,7 @@ for d = 1:4
         if board(r,c)==PIT 
             % WUMPUS 
             percept(2) = 1; 
-        elseif
-            board(r,c)==WUMPUS 
+        elseif board(r,c)==WUMPUS 
             % WUMPUS 
             percept(1) = 1; 
         elseif board(r,c)==BOTH 
