@@ -55,7 +55,7 @@ if isempty(agent)
     escape = []; 
     travel = []; 
     kill = []; 
-    trials = 50;
+    trials = 100;
 end
 
 t = t + 1;

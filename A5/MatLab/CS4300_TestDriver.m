@@ -12,11 +12,14 @@ function r = CS4300_TestDriver()
         try
             clear CS4300_MC_agent;
             [scores(length(scores) + 1), t]=CS4300_WW1(50,'CS4300_MC_agent',boards(a).board);
-            successes(length(scores) + 1) = t(length(t)).agent.succeed;
+            successes(length(successes) + 1) = t(length(t)).agent.succeed;
         catch
             errored_boards = errored_boards + 1;
         end
     end
-    i = 0;
+    mean_score = mean(scores);
+    var_score = var(scores);
+    score_ci = paramci(fitdist(scores.', 'Normal'));
+    
 end
 
