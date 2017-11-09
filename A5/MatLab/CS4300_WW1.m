@@ -43,7 +43,7 @@ bumped = 0;
 screamed = 0;
 
 score = 0;
-
+ 
 while step<max_steps&done==0
     step = step + 1;
     percept = CS4300_get_percept(board,agent,bumped,screamed);

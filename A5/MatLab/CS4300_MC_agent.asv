@@ -193,7 +193,7 @@ stenches(row, col) = percept(1);
 
 
 % Kill Wumpus 
-[rW,cW] = find(Wumpus>=0.9); 
+[rW,cW] = find(Wumpus==1); 
 if ~isempty(rW) 
     r_kill = []; 
     c_kill = []; 
