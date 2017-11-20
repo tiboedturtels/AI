@@ -22,7 +22,7 @@ function policy = CS4300_MDP_policy(S,A,P,U)
 states_count = length(S);
 
 %a vector of the policy
-policy = zeros(length(S));
+policy = zeros(states_count, 1);
 
 %cycle through the states and find the optimal action for each state
 for state = S

@@ -42,8 +42,9 @@ function [U,U_trace] = CS4300_MDP_value_iteration(S,A,P,R,gamma,...
 
 state_count = length(S);
 iter = 1;
-U = zeros(state_count, 1);
+U = zeros(state_count);
 U_trace = [];
+delta = 0;
 
 %loop unil the maximum loops is hit
 while(iter <= max_iter)
@@ -71,14 +72,11 @@ while(iter <= max_iter)
         end
         U(state) = max_value * gamma + R(state);
         if (U(state) - past_U(state)) > delta
-           delta =  U(state) - past_U(state);
+            
         end
     end
     
+    
     iter = iter + 1;
-    if(delta < (eta*(1 - gamma) / gamma))
-        break
-    end
+    
 end
-
-U_trace(iter).trace = U;
