@@ -22,12 +22,12 @@ function policy = CS4300_MDP_policy(S,A,P,U)
 states_count = length(S);
 
 %a vector of the policy
-policy = zeros(states_count, 1);
+policy = zeros(1,states_count);
 
 %cycle through the states and find the optimal action for each state
 for state = S
     %the greatest value that can be obtained taking an action at this state
-    max_value = 0;
+    max_value = -10000;
     %action that must be taken to achieve the max value
     max_value_action = 0;
     for action = A
