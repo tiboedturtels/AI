@@ -1,17 +1,20 @@
-function policy = CS4300_test_policy_function
-% CS4300_MDP_policy - generate a policy from utilities 
-% See p. 648 Russell & Norvig 
+function [S,A,R,P,U,Ut] = CS4300_run_value_iteration(gamma,max_iter)
+% CS4300_run_value_iteration - runs the value iteration example in the book
+% See p. 648 and p. 651 Russell & Norvig 
 % On input: 
-% S (vector): states (1 to n) 
-% A (vector): actions (1 to k) 
-% P (nxk struct array): transition model 
-% (s,a).probs (a vector with n transition probabilities 
-% from s to s_prime, given action a) 
-% U (vector): state utilities 
+%   gamma (float): discount factor
+%   max_iter (int): max number of iterations  
 % On output: 
-% policy (vector): actions per state 
+%   S (vector): states (1 to n) 
+%   A (vector): actions (1 to k)
+%   R (vector): state rewards 
+%   P (nxk struct array): transition model 
+%       (s,a).probs (a vector with n transition probabilities 
+%       (from s to s_prime, given action a) 
+%   U (vector): state utilities 
+%   U_trace (iterxn): trace of utility values during iteration 
 % Call: 
-% p = CS4300_MDP_policy(S,A,P,U); 
+%   [S,A,R,P,U,Ut] = CS4300_run_value_iteration(0.999999,1000)
 % Author: 
 % William Garnes and Cameron Jackson 
 % UU 
@@ -94,16 +97,9 @@ P(11,DOWN).probs = [0,0,0,0,0,0,0,0,0,0,0];
 P(11,LEFT).probs = [0,0,0,0,0,0,0,0,0,0,0];
 P(11,RIGHT).probs = [0,0,0,0,0,0,0,0,0,0,0];
 
-
-REWARD = 1;
+%rewards
+REWARD = -0.04;
 R = [REWARD,REWARD,REWARD,REWARD,REWARD,REWARD,-1,REWARD,REWARD,REWARD,1];
 
-gamma = 0.999999;
 eta = .1;
-max_iter = 100;
-
-[U, U_trace] = CS4300_MDP_value_iteration(S,A,P,R,gamma,eta,max_iter);
-policy = CS4300_MDP_policy(S,A,P,U);
-
-U
-policy
+[U, Ut] = CS4300_MDP_value_iteration(S,A,P,R,gamma,eta,max_iter);
