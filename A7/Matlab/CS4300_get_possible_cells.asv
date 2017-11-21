@@ -51,7 +51,7 @@ function [target, miss_left, miss_right] = CS4300_get_possible_cells(state, acti
             miss_right = state + ROW_UP;
         end
     
-    elseif action == RIGHT
+    if action == RIGHT
         if x < 4
             target = state + COL_UP;
         end
