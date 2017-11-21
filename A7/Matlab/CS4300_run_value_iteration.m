@@ -26,10 +26,10 @@ S = 1:11;
 
 %Board Actions 
 UP = 1;
-DOWN = 2;
-LEFT = 3;
+LEFT = 2;
+DOWN = 3;
 RIGHT = 4;
-A = [UP, DOWN, LEFT, RIGHT];
+A = [UP, LEFT, DOWN, RIGHT];
 
 %probabilities
 P(1,UP).probs = [.1,.1,0,0,.8,0,0,0,0,0,0];
@@ -98,7 +98,7 @@ P(11,LEFT).probs = [0,0,0,0,0,0,0,0,0,0,0];
 P(11,RIGHT).probs = [0,0,0,0,0,0,0,0,0,0,0];
 
 %rewards
-REWARD = -0.04;
+REWARD = 0.1;
 R = [REWARD,REWARD,REWARD,REWARD,REWARD,REWARD,-1,REWARD,REWARD,REWARD,1];
 
 eta = .1;
