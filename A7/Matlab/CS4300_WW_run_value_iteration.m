@@ -29,7 +29,7 @@ DOWN = 2;
 LEFT = 3;
 RIGHT = 4;
 A = [UP, DOWN, LEFT, RIGHT];
-REW = -0.04;
+REW = -0.2;
 
 
 gold = 16;
