@@ -2,23 +2,23 @@ function [S,A,R,P,U,Ut] = CS4300_run_value_iteration(gamma,max_iter)
 % CS4300_run_value_iteration - runs the value iteration example in the book
 % See p. 648 and p. 651 Russell & Norvig 
 % On input: 
-%   gamma (float): discount factor
-%   max_iter (int): max number of iterations  
+%     gamma (float): discount factor
+%     max_iter (int): max number of iterations  
 % On output: 
-%   S (vector): states (1 to n) 
-%   A (vector): actions (1 to k)
-%   R (vector): state rewards 
-%   P (nxk struct array): transition model 
+%     S (vector): states (1 to n) 
+%     A (vector): actions (1 to k)
+%     R (vector): state rewards 
+%     P (nxk struct array): transition model 
 %       (s,a).probs (a vector with n transition probabilities 
 %       (from s to s_prime, given action a) 
-%   U (vector): state utilities 
-%   U_trace (iterxn): trace of utility values during iteration 
+%     U (vector): state utilities 
+%     U_trace (iterxn): trace of utility values during iteration 
 % Call: 
-%   [S,A,R,P,U,Ut] = CS4300_run_value_iteration(0.999999,1000)
+%     [S,A,R,P,U,Ut] = CS4300_run_value_iteration(0.999999,1000)
 % Author: 
-% William Garnes and Cameron Jackson 
-% UU 
-% Fall 2017 
+%     William Garnes and Cameron Jackson 
+%     UU 
+%     Fall 2017 
 %
 
 %this tests the board on page 464
