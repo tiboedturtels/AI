@@ -29,34 +29,27 @@ DOWN = 2;
 LEFT = 3;
 RIGHT = 4;
 A = [UP, DOWN, LEFT, RIGHT];
-REW = -0.04;
 
 
 gold = 16;
 death = [3,7,11];
-
-
 P(16,4).probs = zeros(1,16);
 num_states = length(S);
 num_actions = length(A);
 for state = 1 : num_states
+    if state ~= gold && ~contains(
     for action = 1 : num_actions
+        [target, miss_left, miss_right] = CS4300_get_possible_cells(state,action);
         P(state, action).probs = zeros(1,16);
-        if state ~= gold && ~ismember(state, death)
-            [target, miss_left, miss_right] = CS4300_get_possible_cells(state,action);
-            P(state, action).probs(target) = P(state, action).probs(target) + 0.8;
-            P(state, action).probs(miss_left) = P(state, action).probs(miss_left) + 0.1;
-            P(state, action).probs(miss_right) = P(state, action).probs(miss_right) + 0.1;
-        end
+        P(state, action).probs(target) = P(state, action).probs(target) + 0.8;
+        P(state, action).probs(miss_left) = P(state, action).probs(miss_left) + 0.1;
+        P(state, action).probs(miss_right) = P(state, action).probs(miss_right) + 0.1;
     end
 end 
 
 %rewards
-R = ones(1,16)*REW;
-for i = 1 : length(death)
-    R(death(i)) = -1;
-end
-R(gold) = 1;
+REW = -0.04;
+R = [REW,REW,-1,REW,  REW,REW,-1,REW,  REW,REW,-1,REW,  REW,REW,REW,1];
 
 eta = .1;
 [U, Ut] = CS4300_MDP_value_iteration(S,A,P,R,gamma,eta,max_iter);
