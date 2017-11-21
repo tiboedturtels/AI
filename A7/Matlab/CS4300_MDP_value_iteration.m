@@ -27,15 +27,6 @@ function [U,U_trace] = CS4300_MDP_value_iteration(S,A,P,R,gamma,...
 %     U’ = 0.7053 0.6553 0.6114 0.3879 0.7616 0 0.6600 -1.0000 
 %       0.8116 0.8678 0.9178 1.0000
 % 
-<<<<<<< HEAD
-% Layout:           1 
-%                   ˆ 
-% 9 10 11 12        | 
-% 5  6  7  8    2 <- -> 4 
-% 1  2  3  4        | 
-%                   V 
-%                   3 
-=======
 % Layout:                1 
 %                        ˆ 
 %     9 10 11 12         | 
@@ -43,7 +34,6 @@ function [U,U_trace] = CS4300_MDP_value_iteration(S,A,P,R,gamma,...
 %     1  2  3  4         | 
 %                        V 
 %                        3 
->>>>>>> 8439923ca3c935dc3f453e3962801f56cec209a0
 % Author: 
 %     William Garnes and Cameron Jackson 
 %     UU 
