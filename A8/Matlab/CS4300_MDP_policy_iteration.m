@@ -41,7 +41,7 @@ function [policy,U,Ut] = CS4300_MDP_policy_iteration(S,A,P,R,k,gamma)
 %       1 
 % 
 % Author: 
-%       William Garnes
+%       William Garnes and Cameron Jackson
 %       UU 
 %       Fall 2017 
 %
