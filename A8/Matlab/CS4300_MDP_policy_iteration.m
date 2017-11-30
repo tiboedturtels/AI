@@ -1,4 +1,4 @@
-function [policy,U,Ut] = CS4300_MDP_policy_iteration(S,A,P,R,k,gamma) 
+function [policy,U,Ut] = CS4300_MDP_policy_iteration(S,A,P,R,k,gamma)
 % CS4300_MDP_policy_iteration - policy iteration 
 % Chapter 17 Russell and Norvig (Table p. 657) 
 % On input: 
@@ -46,3 +46,49 @@ function [policy,U,Ut] = CS4300_MDP_policy_iteration(S,A,P,R,k,gamma)
 %       Fall 2017 
 %
 
+%tells how many states there are
+statesCount = length(S);
+
+%creates utility and fills it with zeros
+U = zeros(1, statesCount);
+
+%vector to hold all of the utilities that are created
+Ut = [];
+
+%creates policy and fills it with a random action
+policy = zeros(1, statesCount);
+for index = S
+    policy(index) = randi(4,1);
+end
+
+%tells if the policy has changed
+unchanged = false;
+
+index = 1;
+while ~unchanged
+    Ut(index).trace = U;
+    U = CS4300_Policy_Evaluation(policy,U,S,P,R,gamma);
+    utilityPolicy = CS4300_MDP_policy(S,A,P,U);
+    
+    unchanged = true;
+    for state = S
+        utilityPolicyValue = 0;
+        policyValue = 0;
+        
+        for newState = S
+            utilityPolicyValue = utilityPolicyValue + ...
+                (P(state,utilityPolicy(state)).probs(newState) ...
+                * U(newState));
+            
+            policyValue = policyValue + ...
+                (P(state,policy(state)).probs(newState) * U(newState));
+        end
+        
+        if(utilityPolicyValue > policyValue)
+            policy(state) = utilityPolicy(state);
+            unchanged = false;
+        end
+    end
+    
+    index = index + 1;
+end
