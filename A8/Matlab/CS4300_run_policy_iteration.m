@@ -1,4 +1,4 @@
-function [S,A,R,P,U,Ut,policy] = CS4300_run_value_iteration(gamma,max_iter, reward)
+function [S,A,R,P,U,Ut,policy] = CS4300_run_policy_iteration(gamma,max_iter, reward)
 % CS4300_run_value_iteration - runs the value iteration example in the book
 % See p. 648 and p. 651 Russell & Norvig 
 % On input: 
