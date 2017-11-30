@@ -67,7 +67,7 @@ unchanged = false;
 index = 1;
 while ~unchanged
     Ut(index).trace = U;
-    U = CS4300_Policy_Evaluation(policy,U,S,P,R,gamma);
+    U = CS4300_Policy_Evaluation(policy,U,S,P,R,gamma,k);
     utilityPolicy = CS4300_MDP_policy(S,A,P,U);
     
     unchanged = true;
