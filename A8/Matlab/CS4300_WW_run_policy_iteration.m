@@ -1,4 +1,4 @@
-function [S,A,R,P,U,Ut] = CS4300_WW_run_policy_iteration(gamma,max_iter)
+function [S,A,R,P,U,Ut,policy] = CS4300_WW_run_policy_iteration(gamma,max_iter)
 % CS4300_WW_run_value_iteration - runs the value iteration for the given Wumpus
 % World Problem
 % On input: 
@@ -60,7 +60,7 @@ R(gold) = 1;
 
 tic;
 for i = 1 : 1000
-    [PF, U1, Ut] = CS4300_MDP_policy_iteration(S,A,P,R,max_iter,gamma);
+    [policy, U, Ut] = CS4300_MDP_policy_iteration(S,A,P,R,max_iter,gamma);
 end
 time = toc;
 t = 1;
