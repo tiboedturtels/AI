@@ -1,16 +1,15 @@
 function [target, miss_left, miss_right] = CS4300_get_possible_cells(state, action)
 % CS4300_get_possible_cells - Helper function which gets an array of states
-% that cold result from a given state and action
-% See p. 648 Russell & Norvig 
+% that could result from a given state and action
 % On input: 
 %     state (Integer): current state
 %     action (Integer): currently selected action
 % On output: 
-%     target (Integer): the state the agent intends to go to
-%     miss_left (Integer): the state if 
-%     miss_right (Integer): the state the agent intends to go to
+%     target (Integer): the state the agent is facing toward
+%     miss_left (Integer): the state to the agent's left
+%     miss_right (Integer): the state to the agent's right
 % Call: 
-%     p = CS4300_MDP_policy(S,A,P,U); 
+%     [t, l, r] = CS4300_get_possible_cells(2, 1);
 % Author: 
 %     William Garnes and Cameron Jackson 
 %     UU 
