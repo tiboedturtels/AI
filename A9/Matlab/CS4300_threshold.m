@@ -1,4 +1,17 @@
 function thres = CS4300_threshold(w, x)
+% CS4300_threshold 
+% On input:
+%       w ((n+1)x1 vector): weights for linear function 
+%       x (nx1 array): n independent variable samples each of length m 
+% On output: 
+%       thres : value of the threshold for w * x
+% Call: 
+%       logis = CS4300_logistic(w, x); 
+% Author: 
+%       William Garnes and Cameron Jackson 
+%       UU 
+%       Fall 2017 
+%
 
 thres = 0;
 

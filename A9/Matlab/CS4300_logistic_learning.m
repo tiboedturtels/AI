@@ -3,22 +3,22 @@ function [w,per_cor,Se] = ...
 % CS4300_logistic_learning - find linear separating hyperplane 
 % Eqn 18.8, p. 727 Russell and Norvig 
 % On input: 
-% X (nxm array): n independent variable samples each of length m 
-% y (nx1 vector): dependent variable samples 
-% alpha (float): learning rate 
-% max_iter (int): max number of iterations 
-% rate (Boolean): 1 use alpha = 1000/(1000+iter) else constant 
-% alpha 
+%       X (nxm array): n independent variable samples each of length m 
+%       y (nx1 vector): dependent variable samples 
+%       alpha (float): learning rate 
+%       max_iter (int): max number of iterations 
+%       rate (Boolean): 1 use alpha = 1000/(1000+iter) else constant 
+%       alpha 
 % On output: 
-% w ((m+1)x1 vector): weights for linear function 
-% per_cor (kx1 array): trace of percentage correct with weight 
-% Se (kx1 array): trace of squared error 
+%       w ((m+1)x1 vector): weights for linear function 
+%       per_cor (kx1 array): trace of percentage correct with weight 
+%       Se (kx1 array): trace of squared error 
 % Call: 
-% [w,pc,Se] = CS4300_logistic_learning(X,y,0.1,10000,1); 
+%       [w,pc,Se] = CS4300_logistic_learning(X,y,0.1,10000,1); 
 % Author: 
-% William Garnes and Cameron Jackson 
-% UU 
-% Fall 2017 
+%       William Garnes and Cameron Jackson 
+%       UU 
+%       Fall 2017 
 %
 
 %the number of rows and columns
@@ -51,7 +51,7 @@ for iter =  1:max_iter
         x_values = X(row,1:col_count);
         %get a new weight value
         logis = CS4300_logistic(w, x_values);
-        new_value = alpha * (y - logis) * logis * (1 - logis);
+        new_value = alpha * (y_value - logis) * logis * (1 - logis);
         
         %update the weights
         for w_index = 2:w_count
@@ -66,6 +66,9 @@ for iter =  1:max_iter
     
     correct_percent = 1 - (error_count / row_count);
     per_cor = [per_cor,correct_percent];
+    
+    error_squared = (error_count / row_count) ^ 2;
+    Se = [Se,error_squared];
     
     if(correct_percent == 1)
        return 
