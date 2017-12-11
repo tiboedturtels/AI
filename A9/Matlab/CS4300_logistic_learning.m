@@ -20,3 +20,54 @@ function [w,per_cor,Se] = ...
 % UU 
 % Fall 2017 
 %
+
+%the number of rows and columns
+[row_count,col_count] = size(X);
+
+
+%vector of the weights
+w = zeros(1, 1 + col_count);
+
+%length of the weight vector
+w_count = length(w);
+
+%how many are correct for each loop
+per_cor = [];
+Se = [];
+
+for iter =  1:max_iter
+    if(rate == 1)
+       alpha = 1000/(1000+iter); 
+    end
+    
+    %how many errors there are this loop
+    error_count = 0;
+    
+    %loop through each of the rows
+    for row = 1:row_count
+        %get the y value at the row
+        y_value = y(row);
+        %get all of the x values at the row
+        x_values = X(row,1:col_count);
+        %get a new weight value
+        logis = CS4300_logistic(w, x_values);
+        new_value = alpha * (y - logis) * logis * (1 - logis);
+        
+        %update the weights
+        for w_index = 2:w_count
+           w(w_index) = w(w_index) + (new_value * x_values(w_index - 1)); 
+        end
+        w(1) = w(1) + new_value;
+        
+        if(new_value ~= 0)
+           error_count = error_count + 1; 
+        end
+    end
+    
+    correct_percent = 1 - (error_count / row_count);
+    per_cor = [per_cor,correct_percent];
+    
+    if(correct_percent == 1)
+       return 
+    end
+end
